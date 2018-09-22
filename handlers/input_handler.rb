@@ -21,10 +21,6 @@ class InputHandler
       input.to_i
     end
 
-    def get_element_in_array_from_input(array, available_options)
-      array[get_input_for_array(available_options)]
-    end
-
     def treat_input
       input = gets.chomp.gsub(/[^\d]/, '')
       input == '' ? input : input.to_i
