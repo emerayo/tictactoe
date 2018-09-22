@@ -1,0 +1,16 @@
+require_relative 'handlers/input_handler'
+
+require_relative 'helpers/array_helper'
+require_relative 'helpers/print_helper'
+
+require_relative 'models/board'
+require_relative 'models/board_evaluator'
+require_relative 'models/game'
+require_relative 'models/game_setup'
+require_relative 'models/human'
+require_relative 'models/marker'
+require_relative 'models/player'
+require_relative 'models/player_type'
+require_relative 'models/robot'
+require_relative 'models/robot'
+require_relative 'models/robot_difficulty'

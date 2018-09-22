@@ -17,7 +17,9 @@ class Board
   end
 
   def print_available_spaces
-    PrintHelper.print_available_spaces(BoardEvaluator.available_spaces(array).join(', '))
+    PrintHelper.print_available_spaces(
+      BoardEvaluator.available_spaces(array).join(', ')
+    )
   end
 
 end

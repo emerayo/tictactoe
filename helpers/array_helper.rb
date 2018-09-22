@@ -1,4 +1,4 @@
-require_relative '../initializer'
+# frozen_string_literal: true
 
 class ArrayHelper
 

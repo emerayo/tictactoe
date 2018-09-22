@@ -1,6 +1,6 @@
-# encoding: utf-8
+# frozen_string_literal: true
 
-require_relative '../../helpers/array_helper'
+require_relative '../spec_helper'
 
 describe ArrayHelper, type: :model do
 

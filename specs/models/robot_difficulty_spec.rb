@@ -1,6 +1,6 @@
-# encoding: utf-8
+# frozen_string_literal: true
 
-require_relative '../../models/robot_dificulty'
+require_relative '../spec_helper'
 
 describe RobotDifficulty, type: :model do
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class GameSetup
 
   attr_accessor :player1, :player2, :second_marker
