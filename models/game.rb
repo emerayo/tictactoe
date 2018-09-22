@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../tictactoe'
 
 class Game
@@ -5,7 +7,7 @@ class Game
   attr_accessor :last_player
 
   def initialize
-    @board = ::Board.new(Marker::M1, Marker::M2)
+    @board = Board.new(Marker::M1, Marker::M2)
   end
 
   def play
@@ -25,7 +27,8 @@ class Game
   end
 
   def finished_game?
-    BoardEvaluator.game_is_over?(@board.array) || BoardEvaluator.game_is_tied?(@board.array)
+    BoardEvaluator.game_is_over?(@board.array) ||
+      BoardEvaluator.game_is_tied?(@board.array)
   end
 
   def setup_game
@@ -36,22 +39,17 @@ class Game
     @player2 = setup.player2
   end
 
-  def first_run
-    @board.print_board
-  end
-
   def round
     @board.print_board
-    PrintHelper.turn(@player1.name)
-    get_player_move(@player1, @player2)
+    player_turn(@player1, @player2)
     @board.print_board
 
     return if finished_game?
-    PrintHelper.turn(@player2.name)
-    get_player_move(@player2, @player1)
+    player_turn(@player2, @player1)
   end
 
-  def get_player_move(player, next_player)
+  def player_turn(player, next_player)
+    PrintHelper.turn(player.name)
     spot = player.next_move(@board, next_player.marker)
     @board.mark_in_table(spot, player.marker)
     @last_player = player
