@@ -10,8 +10,8 @@ class InputHandler
       loop = true
 
       while loop
-        input = gets.chomp.gsub(/[^\d]/, '')
-        if available_options.join(', ').include? input
+        input = treat_input
+        if available_options.include? input
           loop = false
         else
           PrintHelper.wrong_option
@@ -23,6 +23,11 @@ class InputHandler
 
     def get_element_in_array_from_input(array, available_options)
       array[get_input_for_array(available_options)]
+    end
+
+    def treat_input
+      input = gets.chomp.gsub(/[^\d]/, '')
+      input == '' ? input : input.to_i
     end
 
   end
