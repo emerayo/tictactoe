@@ -11,11 +11,7 @@ class InputHandler
 
       while loop
         input = treat_input
-        if available_options.include? input
-          loop = false
-        else
-          PrintHelper.wrong_option
-        end
+        loop = invalid_input?(available_options, input)
       end
 
       input.to_i
@@ -24,6 +20,13 @@ class InputHandler
     def treat_input
       input = gets.chomp.gsub(/[^\d]/, '')
       input == '' ? input : input.to_i
+    end
+
+    def invalid_input?(available_options, input)
+      return if available_options.include? input
+
+      PrintHelper.wrong_option
+      true
     end
 
   end
