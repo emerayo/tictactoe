@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class RobotDifficulty
 
-  EASY = 'Easy'.freeze
-  HARD = 'Hard'.freeze
-  TYPES = [EASY, HARD]
+  EASY = 'Easy'
+  HARD = 'Hard'
+  TYPES = [EASY, HARD].freeze
 
 end

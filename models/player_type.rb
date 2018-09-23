@@ -2,8 +2,8 @@
 
 class PlayerType
 
-  HUMAN = 'Human'.freeze
-  ROBOT = 'Robot'.freeze
-  TYPES = [HUMAN, ROBOT]
+  HUMAN = 'Human'
+  ROBOT = 'Robot'
+  TYPES = [HUMAN, ROBOT].freeze
 
 end
