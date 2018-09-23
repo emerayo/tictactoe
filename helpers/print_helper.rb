@@ -6,7 +6,7 @@ class PrintHelper
 
     def print_options(types, klass_name)
       puts "These are the available #{klass_name}s:"
-      types.each_with_index do |type, index|
+      types.each_with_index do |_type, index|
         puts "Type #{index} for #{types[index]}"
       end
     end
@@ -15,8 +15,13 @@ class PrintHelper
       puts "Type one of these available spaces: #{available_spaces}"
     end
 
-    def new_player(player_type, marker)
-      puts "New #{player_type} chosen! With this marker: #{marker}"
+    def new_player(player_type, marker, difficulty = nil)
+      if difficulty.nil?
+        puts "New #{player_type} chosen! With marker #{marker}"
+      else
+        puts "New #{player_type} chosen! With marker #{marker}"\
+             " and difficulty #{difficulty}"
+      end
     end
 
     def turn(player_name)

@@ -3,9 +3,19 @@
 require_relative 'player'
 
 class Robot < Player
+
+  attr_reader :difficulty
+
+  def initialize(name, marker, difficulty)
+    super(name, marker)
+    @difficulty = difficulty
+  end
+
   def next_move(board, next_player_marker)
     eval_board(board, next_player_marker)
   end
+
+  private
 
   def eval_board(board, next_player_marker)
     spot = nil
@@ -26,7 +36,7 @@ class Robot < Player
     spot
   end
 
-  def get_best_move(board, next_player_marker, depth = 0, best_score = {})
+  def get_best_move(board, next_player_marker)
     available_spaces_arr = BoardEvaluator.available_spaces(board.array)
     best_move = nil
     available_spaces_arr.each do |as|

@@ -16,6 +16,8 @@ describe GameSetup, type: :model do
       expect(game_setup.player2.is_a? (Robot)).to be_truthy
       expect(game_setup.player1.marker).to be_eql 'X'
       expect(game_setup.player2.marker).to be_eql 'O'
+      expect(game_setup.player1.difficulty).to be_eql 'Hard'
+      expect(game_setup.player2.difficulty).to be_eql 'Hard'
     end
 
     it 'should output print_available_spaces message' do

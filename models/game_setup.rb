@@ -12,32 +12,26 @@ class GameSetup
 
   private
 
-  PLAYER = 'Player'.freeze
+  PLAYER = 'Player'
 
   def choose_player_type(name)
-    PrintHelper.print_options(PlayerType::TYPES, 'PlayerType')
-
-    player_type = InputHandler.get_input_for_array(ArrayHelper.array_indexes(PlayerType::TYPES))
+    player_type = handle_input(PlayerType::TYPES, PlayerType.to_s)
     marker = choose_marker
-
-    PrintHelper.new_player(PlayerType::TYPES[player_type], marker)
 
     new_player(player_type, name, marker)
   end
 
-  def new_player(type, name, marker)
-    if PlayerType::TYPES[type] == PlayerType::HUMAN
-      Human.new(name, marker)
-    else
-      Robot.new(name, marker)
-    end
+  def handle_input(array, klass_name)
+    PrintHelper.print_options(array, klass_name)
+
+    InputHandler.get_input_for_array(
+      ArrayHelper.array_indexes(array)
+    )
   end
 
   def choose_marker
     if @second_marker.nil?
-      PrintHelper.print_options(Marker::MARKERS, 'Marker')
-      marker = InputHandler.get_input_for_array(ArrayHelper.array_indexes(Marker::MARKERS))
-      marker = Marker::MARKERS[marker]
+      marker = Marker::MARKERS[handle_input(Marker::MARKERS, Marker.to_s)]
 
       assign_second_marker(marker)
       marker
@@ -49,5 +43,21 @@ class GameSetup
   def assign_second_marker(marker)
     left_option_arr = Marker::MARKERS - [marker]
     @second_marker = left_option_arr.first
+  end
+
+  def new_player(type, name, marker)
+    if PlayerType::TYPES[type] == PlayerType::HUMAN
+      PrintHelper.new_player(PlayerType::TYPES[type], marker)
+      Human.new(name, marker)
+    else
+      difficulty = choose_robot_difficulty
+      PrintHelper.new_player(PlayerType::TYPES[type], marker, difficulty)
+      Robot.new(name, marker, difficulty)
+    end
+  end
+
+  def choose_robot_difficulty
+    index = handle_input(RobotDifficulty::TYPES, RobotDifficulty.to_s)
+    RobotDifficulty::TYPES[index]
   end
 end

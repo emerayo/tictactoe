@@ -5,8 +5,8 @@ require_relative '../spec_helper'
 describe Game, type: :model do
 
   let(:board) { Board.new(Marker::M1, Marker::M2) }
-  let(:robot1) { Robot.new('Player 1', 'X') }
-  let(:robot2) { Robot.new('Player 2', 'O') }
+  let(:robot1) { Robot.new('Player 1', 'X', RobotDifficulty::HARD) }
+  let(:robot2) { Robot.new('Player 2', 'O', RobotDifficulty::HARD) }
   let(:game) { Game.new }
 
   before(:each) do
@@ -41,8 +41,11 @@ describe Game, type: :model do
       it_behaves_like 'console output with message', /These are the available Markers:/
       it_behaves_like 'console output with message', /Type 0 for O/
       it_behaves_like 'console output with message', /Type 1 for X/
-      it_behaves_like 'console output with message', /New Robot chosen! With this marker: O/
-      it_behaves_like 'console output with message', /New Robot chosen! With this marker: X/
+      it_behaves_like 'console output with message', /These are the available RobotDifficultys:/
+      it_behaves_like 'console output with message', /Type 0 for O/
+      it_behaves_like 'console output with message', /Type 1 for X/
+      it_behaves_like 'console output with message', /New Robot chosen! With marker O and difficulty Hard/
+      it_behaves_like 'console output with message', /New Robot chosen! With marker X and difficulty Hard/
     end
 
     context 'player 1 wins the game' do
