@@ -5,9 +5,19 @@ require_relative '../spec_helper'
 describe PrintHelper, type: :model do
 
   describe '#print_options' do
-    it 'should output print_available_spaces message' do
-      msg = "These are the available Players:\nType 0 for Human\nType 1 for Robot\n"
-      expect { described_class.print_options(['Human', 'Robot'], 'Player') }.to output(msg).to_stdout
+    it 'should output print_available_spaces message for player type' do
+      msg = "These are the available PlayerTypes:\nType 0 for Human\nType 1 for Robot\n"
+      expect { described_class.print_options(PlayerType::TYPES, PlayerType.to_s) }.to output(msg).to_stdout
+    end
+
+    it 'should output print_available_spaces message for robot difficulties' do
+      msg = "These are the available RobotDifficulties:\nType 0 for Easy\nType 1 for Hard\n"
+      expect { described_class.print_options(RobotDifficulty::TYPES, RobotDifficulty.to_s) }.to output(msg).to_stdout
+    end
+
+    it 'should output print_available_spaces message for robot difficulties' do
+      msg = "These are the available Markers:\nType 0 for O\nType 1 for X\n"
+      expect { described_class.print_options(Marker::MARKERS, Marker.to_s) }.to output(msg).to_stdout
     end
   end
 

@@ -41,7 +41,7 @@ describe Game, type: :model do
       it_behaves_like 'console output with message', /These are the available Markers:/
       it_behaves_like 'console output with message', /Type 0 for O/
       it_behaves_like 'console output with message', /Type 1 for X/
-      it_behaves_like 'console output with message', /These are the available RobotDifficultys:/
+      it_behaves_like 'console output with message', /These are the available RobotDifficulties:/
       it_behaves_like 'console output with message', /Type 0 for O/
       it_behaves_like 'console output with message', /Type 1 for X/
       it_behaves_like 'console output with message', /New Robot chosen! With marker O and difficulty Hard/

@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
+require 'active_support/inflector'
+
 class PrintHelper
 
   class << self
 
     def print_options(types, klass_name)
-      puts "These are the available #{klass_name}s:"
+      puts "These are the available #{klass_name.pluralize}:"
       types.each_with_index do |_type, index|
         puts "Type #{index} for #{types[index]}"
       end
