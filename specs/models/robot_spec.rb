@@ -24,6 +24,30 @@ describe Robot, type: :model do
 
       expect(robot_easy.next_move(board, Marker::M1)).to_not be_eql 4
     end
+
+    it 'should return 0 to finish the game' do
+      board.array[1] = 'O'
+      board.array[2] = 'O'
+      board.array[4] = 'X'
+
+      expect(robot.next_move(board, Marker::M2)).to be_eql 0
+    end
+
+    it 'should return 5 to finish the game' do
+      board.array[3] = 'O'
+      board.array[4] = 'O'
+
+      expect(robot.next_move(board, Marker::M2)).to be_eql 5
+    end
+
+    it 'should return 8 to finish the game' do
+      board.array[6] = 'O'
+      board.array[7] = 'O'
+      board.array[4] = 'X'
+
+      expect(robot.next_move(board, Marker::M2)).to be_eql 8
+    end
+
   end
 
 end

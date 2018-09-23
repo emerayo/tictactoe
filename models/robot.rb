@@ -5,6 +5,7 @@ require_relative 'player'
 class Robot < Player
 
   attr_reader :difficulty
+  attr_accessor :board_copy
 
   def initialize(name, marker, difficulty)
     super(name, marker)
@@ -17,50 +18,35 @@ class Robot < Player
 
   private
 
-  def move_for_easy(board, _next_player)
+  def move_for_easy(board, _next_player = nil)
     BoardEvaluator.available_spaces(board.array).sample
   end
 
   def move_for_hard(board, next_player_marker)
-    spot = nil
-    until spot
-      if board.array[4] != @marker && board.array[4] != next_player_marker
-        spot = 4
-        board.array[spot] = @marker
-      else
-        spot = get_best_move(board, next_player_marker)
-        if board.array[spot] != @marker && board.array[spot] != next_player_marker
-          spot
-        else
-          spot = nil
-        end
-      end
+    if board.array[4] != @marker && board.array[4] != next_player_marker
+      4
+    else
+      @board_copy = board
+      get_best_move(next_player_marker)
     end
-
-    spot
   end
 
-  def get_best_move(board, next_player_marker)
-    available_spaces_arr = BoardEvaluator.available_spaces(board.array)
-    available_spaces_arr.each do |as|
-      board.array[as.to_i] = @marker
-      if BoardEvaluator.game_is_over?(board.array)
-        best_move = as.to_i
-        board.array[as.to_i] = as
-        return best_move
-      else
-        board.array[as.to_i] = next_player_marker
-        if BoardEvaluator.game_is_over?(board.array)
-          best_move = as.to_i
-          board.array[as.to_i] = as
-          return best_move
-        else
-          board.array[as.to_i] = as
-        end
-      end
+  def get_best_move(next_player_marker)
+    available_spaces = BoardEvaluator.available_spaces(@board_copy.array)
+    available_spaces.each do |spot|
+      best_move = spot_to_end_game(spot, @marker)
+      best_move = spot_to_end_game(spot, next_player_marker) if best_move.nil?
+
+      return best_move unless best_move.nil?
+
+      @board_copy.array[spot.to_i] = spot
     end
 
-    n = rand(0..available_spaces_arr.count)
-    available_spaces_arr[n].to_i
+    move_for_easy(@board_copy)
+  end
+
+  def spot_to_end_game(spot, marker)
+    @board_copy.array[spot.to_i] = marker
+    spot.to_i if BoardEvaluator.game_is_over?(@board_copy.array)
   end
 end
