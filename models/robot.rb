@@ -42,7 +42,6 @@ class Robot < Player
 
   def get_best_move(board, next_player_marker)
     available_spaces_arr = BoardEvaluator.available_spaces(board.array)
-    best_move = nil
     available_spaces_arr.each do |as|
       board.array[as.to_i] = @marker
       if BoardEvaluator.game_is_over?(board.array)
@@ -60,11 +59,8 @@ class Robot < Player
         end
       end
     end
-    if best_move
-      best_move
-    else
-      n = rand(0..available_spaces_arr.count)
-      available_spaces_arr[n].to_i
-    end
+
+    n = rand(0..available_spaces_arr.count)
+    available_spaces_arr[n].to_i
   end
 end
