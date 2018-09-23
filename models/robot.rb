@@ -12,20 +12,24 @@ class Robot < Player
   end
 
   def next_move(board, next_player_marker)
-    eval_board(board, next_player_marker)
+    send("move_for_#{difficulty.downcase}", board, next_player_marker)
   end
 
   private
 
-  def eval_board(board, next_player_marker)
+  def move_for_easy(board, _next_player)
+    BoardEvaluator.available_spaces(board.array).sample
+  end
+
+  def move_for_hard(board, next_player_marker)
     spot = nil
     until spot
-      if board.array[4] != Marker::M2 && board.array[4] != Marker::M1
+      if board.array[4] != @marker && board.array[4] != next_player_marker
         spot = 4
         board.array[spot] = @marker
       else
         spot = get_best_move(board, next_player_marker)
-        if board.array[spot] != Marker::M2 && board.array[spot] != Marker::M1
+        if board.array[spot] != @marker && board.array[spot] != next_player_marker
           spot
         else
           spot = nil

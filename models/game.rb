@@ -19,6 +19,7 @@ class Game
   private
 
   def finish_game
+    @board.print_board
     if BoardEvaluator.game_is_over?(@board.array)
       PrintHelper.winner(last_player.name)
     else
@@ -42,9 +43,10 @@ class Game
   def round
     @board.print_board
     player_turn(@player1, @player2)
-    @board.print_board
 
     return if finished_game?
+
+    @board.print_board
     player_turn(@player2, @player1)
   end
 
